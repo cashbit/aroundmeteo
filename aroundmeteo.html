@@ -1,0 +1,45 @@
+<head>
+  <title>aroundmeteo</title>
+</head>
+
+<body style="font-family: arial">
+  <h1>Meteo with Meteor !!!</h1>
+
+  {{> hello}}
+</body>
+
+<template name="hello">
+    <table class="table">
+        <tr style="border: solid">
+            <td>Forecast</td>
+            <td>Name</td>
+            <td>Condition</td>
+            <td>Temperature</td>
+            <td>Humidity</td>
+            <td>Pressure</td>
+            <td>Updated on</td>
+            <td>Last fetch on</td>
+            <td></td>
+        </tr>
+      {{#each locality}}
+          <tr >
+              <td style="border-bottom-style: solid; border-bottom-width: 1px;">{{forecast}}</td>
+              <td style="border-bottom-style: solid; border-bottom-width: 1px;">{{actualWeather.name}}</td>
+              <td style="border-bottom-style: solid; border-bottom-width: 1px;">{{description actualWeather}}</td>
+              <td style="border-bottom-style: solid; border-bottom-width: 1px;">{{toCelsius actualWeather.main.temp}}</td>
+              <td style="border-bottom-style: solid; border-bottom-width: 1px;">{{actualWeather.main.humidity}}</td>
+              <td style="border-bottom-style: solid; border-bottom-width: 1px;">{{actualWeather.main.pressure}} ({{lastWeather.main.pressure}})</td>
+              <td style="border-bottom-style: solid; border-bottom-width: 1px;">{{toIsoDate actualWeather.dt}}</td>
+              <td style="border-bottom-style: solid; border-bottom-width: 1px;">{{lastFetch}}</td>
+              <td><button class="js-locality-delete">Delete</button></td>
+          </tr>
+      {{/each}}
+    </table>
+
+
+    <form class="js-locality-new">
+        <input type="text" placeholder="Type to add new place">
+    </form>
+
+    {{#if refreshingStatus}}Refreshing!!!{{/if}}
+</template>
